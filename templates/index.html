@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-brand">
+                <i class="fas fa-wallet"></i> Expense Tracker
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}" class="nav-link active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a></li>
+                <li><a href="{{ url_for('add_expense') }}" class="nav-link">
+                    <i class="fas fa-plus-circle"></i> Add Expense
+                </a></li>
+                <li><a href="{{ url_for('index') }}" class="nav-link">
+                    <i class="fas fa-chart-pie"></i> Reports
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Personal Expense Tracker</h1>
+    <button><a href="{{ url_for('add_expense') }}">Add New Expense</a></button>
+
+    <h2>Total Expenses: ₹{{ total }}</h2>
+
+    <h3>Category-wise Summary</h3>
+    <ul>
+        {% for category, amount in category_summary.items() %}
+            <li>{{ category }}: ₹{{ amount }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>All Expenses</h3>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount (₹)</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.category }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
