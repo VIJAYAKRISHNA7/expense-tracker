@@ -1,24 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Add Expense</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='expense.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
 </head>
 <body>
-    <h1>Add New Expense</h1>
-    <form method="POST" action="{{ url_for('add_expense') }}">
-        <label>Description:</label><br>
-        <input type="text" name="description" required><br><br>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-brand">
+                <i class="fas fa-wallet"></i> Expense Tracker
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}" class="nav-link">
+                    <i class="fas fa-home"></i> Dashboard
+                </a></li>
+                <li><a href="{{ url_for('add_expense') }}" class="nav-link active">
+                    <i class="fas fa-plus-circle"></i> Add Expense
+                </a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <label>Category:</label><br>
-        <input type="text" name="category" required><br><br>
-
-        <label>Amount (₹):</label><br>
-        <input type="number" step="0.01" name="amount" required><br><br>
-
-        <input type="submit" value="Add Expense">
-    </form>
-    <br>
-    <a href="{{ url_for('index') }}">Back to Home</a>
+    <main>
+        <h1>Expense Tracker</h1>
+        <h2>Add New Expense</h2>
+        
+        <form method="POST" action="{{ url_for('add_expense') }}">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" name="category" id="category" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount (₹)</label>
+                <input type="number" name="amount" id="amount" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date" required placeholder="mm/dd/yyyy">
+            </div>
+            
+            <button type="submit" class="btn-submit">Add Expense</button>
+        </form>
+    </main>
 </body>
 </html>

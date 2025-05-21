@@ -4,13 +4,12 @@
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
-
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="{{ url_for('index') }}" class="nav-brand">
-                <i class="fas fa-wallet"></i> Expense Tracker
+                <i class="fas fa-wallet"></i>Expense Tracker
             </a>
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}" class="nav-link active">
@@ -25,8 +24,10 @@
             </ul>
         </div>
     </nav>
+
     <h1>Personal Expense Tracker</h1>
-    <button><a href="{{ url_for('add_expense') }}">Add New Expense</a></button>
+
+    <button><a href="{{ url_for('add_expense') }}">➕ Add New Expense</a></button>
 
     <h2>Total Expenses: ₹{{ total }}</h2>
 
@@ -45,6 +46,7 @@
                 <th>Category</th>
                 <th>Amount (₹)</th>
                 <th>Date</th>
+                <th>Action</th> <!-- Add this column -->
             </tr>
         </thead>
         <tbody>
@@ -54,6 +56,14 @@
                     <td>{{ expense.category }}</td>
                     <td>{{ expense.amount }}</td>
                     <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <!-- Delete Form -->
+                        <form method="POST" action="{{ url_for('delete_expense', id=expense.id) }}" onsubmit="return confirm('Are you sure you want to delete this expense?');">
+                            <button type="submit" style="color: red; cursor: pointer;">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

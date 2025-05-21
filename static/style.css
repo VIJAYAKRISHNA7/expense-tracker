@@ -18,7 +18,7 @@ h1, h2, h3 {
     text-align: center;
     animation: fadeIn 1s ease forwards;
 }
-h2{
+h2 {
     color: rgb(73, 248, 82);
 }
 
@@ -161,4 +161,20 @@ tbody td {
 tr:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transition: background-color 0.3s;
+}
+
+/* ✅ DELETE button inside table */
+form button[type="submit"] {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #c0392b;
 }

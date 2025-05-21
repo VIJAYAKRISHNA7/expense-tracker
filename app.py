@@ -37,7 +37,12 @@ def add_expense():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add_expense.html')
-
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete_expense(id):
+    expense = Expense.query.get_or_404(id)
+    db.session.delete(expense)
+    db.session.commit()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     with app.app_context():
